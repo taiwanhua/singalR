@@ -1,0 +1,80 @@
+@section header
+{
+     <link rel="stylesheet" href="/css/treetable.css" />
+    <link rel="stylesheet" href="/js/dtree/dtree.css" />
+    <link rel="stylesheet" href="/js/dtree/font/dtreefont.css" />
+}
+<blockquote class="layui-elem-quote news_search toolList" id ="menus">
+</blockquote>
+
+<div class="layui-row">
+    <div class="layui-col-xs2">
+        <ul id="tree" class="ztree"
+            style="padding: 2px; border: 1px solid #ddd; overflow: auto;">
+        </ul>
+    </div>
+    <div class="layui-col-xs10">
+        <table class="layui-table"
+               lay-data="{height: 'full-80', page:true, id:'mainList'}"
+               lay-filter="list" lay-size="sm">
+            <thead>
+            <tr>
+                <th lay-data="{checkbox:true, fixed: true}"></th>
+                <th lay-data="{field:'Name', width:150, sort: true, fixed: true}">組織名稱</th>
+                <th lay-data="{field:'CascadeId', width:150}">層級ID</th>
+                <th lay-data="{field:'ParentName', width:135}">父節點名稱</th>
+                <th lay-data="{field:'SortNo', width:180}">排序號</th>
+                <th lay-data="{field:'Id', width:180}">ID</th>
+                <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barList'}"></th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<!--列表右邊的按鈕-->
+<script type="text/html" id="barList">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">檢視</a>
+</script>
+
+<!--使用者新增/編輯視窗-->
+<div id="divEdit" style="display: none">
+    <form class="layui-form layui-form-pane" action="" id="formEdit">
+
+        <input type="hidden" name="Id" v-model="tmp.Id" />
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">部門名稱</label>
+            <div class="layui-input-block">
+                <input type="text" name="Name" v-model="tmp.Name" required lay-verify="required"
+                       placeholder="請輸入部門名稱" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序號</label>
+            <div class="layui-input-block">
+                <input type="text" name="SortNo" v-model="tmp.SortNo" required lay-verify="required"
+                       placeholder="請輸入排序號" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">所屬部門</label>
+            <div class="layui-input-block">
+                <input id="ParentName" name="ParentName" v-model="tmp.ParentName" class="layui-input" />
+                <input id="ParentId" name="ParentId" v-model="tmp.ParentId"  type="hidden" />
+                
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formSubmit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/userJs/orgs.js?v=1"></script>

@@ -1,0 +1,97 @@
+@section header
+{
+    <link rel="stylesheet" href="/css/treetable.css" />
+}
+<blockquote class="layui-elem-quote news_search toolList" id="menus">
+</blockquote>
+
+<div class="layui-card">
+
+ <table class="layui-table"
+           lay-data="{height: 'full-80', page:true, id:'mainList'}"
+           lay-filter="list" lay-size="sm">
+        <thead>
+        <tr>
+            <th lay-data="{checkbox:true, fixed: true}"></th>
+            <th lay-data="{field:'JobName', width:150, sort: true, fixed: true}">名稱</th>
+             <th lay-data="{field:'Status', width:100,templet: '#statusTpl'}">狀態</th>
+            <th lay-data="{field:'Cron', width:150}">執行頻率</th>
+            <th lay-data="{field:'JobCall', width:150}">呼叫方法</th>
+            <th lay-data="{field:'RunCount', width:150}">執行次數</th>
+            <th lay-data="{field:'LastRunTime', width:150}">上次執行時間</th>
+             <th lay-data="{field:'Remark', width:300}">上次執行時間</th>
+            <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barList'}"></th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="statusTpl">
+        {{# if(d.Status == 0){ }}
+        <span class="layui-badge">停止</span>
+        {{# } else{}}
+        <span class="layui-badge layui-bg-green">正在執行</span>
+        {{# } }}
+    </script>
+
+</div>  
+
+<!--列表右邊的按鈕-->
+<script type="text/html" id="barList">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="changStatus">切換執行狀態</a>
+</script>
+
+<!--新增/編輯視窗-->
+<div id="divEdit" style="display: none">
+    <form class="layui-form" action=""  id="formEdit">
+    <input type="hidden" name="Id" v-model="tmp.Id" />
+    <div class="layui-form-item">
+        <label class="layui-form-label">任務名稱</label>
+        <div class="layui-input-block">
+            <input type="text" name="JobName" v-model="tmp.JobName" required lay-verify="required"
+                placeholder="任務名稱" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">任務地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="JobCall" v-model="tmp.JobCall" required lay-verify="required"
+                placeholder="任務地址" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">任務參數</label>
+        <div class="layui-input-block">
+            <input type="text" name="JobCallParams" v-model="tmp.JobCallParams"
+                placeholder="任務參數，JSON格式" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">CRON表達式</label>
+        <div class="layui-input-block">
+            <input type="text" name="Cron" v-model="tmp.Cron" required lay-verify="required"
+                placeholder="CRON表達式" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+   
+    <div class="layui-form-item">
+        <label class="layui-form-label">備註</label>
+        <div class="layui-input-block">
+            <input type="text" name="Remark" v-model="tmp.Remark"
+                placeholder="備註" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    
+     <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formSubmit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/userJs/openjobs.js"></script>
+
+

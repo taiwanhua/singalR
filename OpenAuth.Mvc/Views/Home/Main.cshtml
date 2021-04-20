@@ -1,0 +1,171 @@
+@section header
+{
+    <link rel="stylesheet" href="/css/main.css" media="all" />
+}
+<div class="panel_box row">
+    <div class="panel col">
+        <a href="javascript:;" data-url="/orgmanager/index">
+            <div class="panel_icon">
+                <i class="layui-icon" data-icon="&#xe63a;">&#xe63a;</i>
+            </div>
+            <div class="panel_word orgs">
+                <span></span>
+                <cite>機構總數</cite>
+            </div>
+        </a>
+    </div>
+    <div class="panel col">
+        <a href="javascript:;" data-url="/Rolemanager/index">
+            <div class="panel_icon" style="background-color:#FF5722;">
+                <i class="iconfont icon-dongtaifensishu" data-icon="icon-dongtaifensishu"></i>
+            </div>
+            <div class="panel_word roles">
+                <span></span>
+                <cite>角色總數</cite>
+            </div>
+        </a>
+    </div>
+    <div class="panel col">
+        <a href="javascript:;" data-url="/UserManager/Index">
+            <div class="panel_icon" style="background-color:#009688;">
+                <i class="layui-icon" data-icon="&#xe613;">&#xe613;</i>
+            </div>
+            <div class="panel_word userAll">
+                <span></span>
+                <cite>使用者總數</cite>
+            </div>
+        </a>
+    </div>
+    <div class="panel col">
+        <a href="javascript:;" data-url="/forms/index">
+            <div class="panel_icon" style="background-color:#5FB878;">
+                <i class="layui-icon" data-icon="&#xe64a;">&#xe64a;</i>
+            </div>
+            <div class="panel_word forms">
+                <span></span>
+                <cite>表單總數</cite>
+            </div>
+        </a>
+    </div>
+    <div class="panel col">
+        <a href="javascript:;" data-url="/flowinstances/index">
+            <div class="panel_icon" style="background-color:#F7B824;">
+                <i class="iconfont icon-wenben" data-icon="icon-wenben"></i>
+            </div>
+            <div class="panel_word flows">
+                <span></span>
+                <cite>我的流程</cite>
+            </div>
+        </a>
+    </div>
+    <div class="panel col max_panel">
+        <a href="javascript:;" data-url="/flowschemes/index">
+            <div class="panel_icon" style="background-color:#2F4056;">
+                <i class="iconfont icon-text" data-icon="icon-text"></i>
+            </div>
+            <div class="panel_word flowschemes">
+                <span></span>
+                <cite>流程模板</cite>
+            </div>
+        </a>
+    </div>
+</div>
+<blockquote class="layui-elem-quote explain">
+    <p>官方部落格：<a href="http://www.cnblogs.com/yubaolee/">http://www.cnblogs.com/yubaolee/</a> </p>
+    <p>
+        系統預設System賬號登錄，可以檢視所有許可權，如果用其他賬號（如：admin/test）可以檢視相應的授權/可見欄位情況。
+        資料庫密碼明文儲存，不要問為什麼不加密，因為你要問這些賬號的密碼我也記不住啊O(∩_∩)O
+    </p>
+    <p>
+        <a href="https://gitee.com/yubaolee/OpenAuth.Core" target="_blank" class="layui-btn layui-btn-xs layui-btn-danger">專案地址</a>
+        <a class="layui-btn layui-btn-xs" target="_blank" href="http://doc.openauth.me">線上文件</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" target="_blank" href="http://demo.openauth.me:1803">企業版入口</a>
+        <span style="color: #f00;">註：【本框架遵循LGPL開源協議，企業單位如商用請聯繫作者授權，謝謝】</span>
+    </p>
+    <p>技術交流QQ群：484498493【已滿】 &nbsp; &nbsp; 626433139【已滿】 &nbsp;&nbsp; 566344079</p>
+</blockquote>
+<div class="row">
+    <div class="sysNotice col">
+        <blockquote class="layui-elem-quote title">更新日誌</blockquote>
+         <div class="layui-elem-quote layui-quote-nm">
+            <h3># 2.0</h3>
+            <p>* 【新增】框架升級至.net core sdk 3.1.100</p>
+             <p>* 【新增】增加<a href="javascript:;" data-url="/usermanager/profile"><cite>個人中心</cite></a>頁面，可修改個人資訊及切換當前預設部門</p>
+             <p>* 【優化】升級layui至2.5.6</p>
+            <p>* 【優化】可以靈活配置使用者可訪問的機構數據許可權</p>
+         </div>
+         <div class="layui-elem-quote layui-quote-nm">
+            <h3># 1.6</h3>
+            <p>* 【新增】日誌及使用者訊息板塊</p>
+            <p>* 【新增】企業版程式碼產生器，可以快速產生帶有頭/明細結構的頁面</p>
+            <p>* 【新增】數據許可權控制，超強的自定義許可權控制功能。詳見:<a href="https://www.cnblogs.com/yubaolee/p/DataPrivilege.html" target="_blank" class="layui-btn layui-btn-xs layui-btn-danger">https://www.cnblogs.com/yubaolee/p/DataPrivilege.html</a></p>
+            <p>* 【新增】完整的欄位許可權控制，可以控制欄位可見及API是否返回欄位值</p>
+            <p>* 【優化】啟用數據字典功能</p>
+            <p>* 【優化】優化導航排序、支援多級導航</p>
+         </div>
+        <div class="layui-elem-quote layui-quote-nm">
+            <h3># 1.5 - 2019.7</h3>
+            <p>* 【優化】升級layui至2.5.4</p>
+            <p>* 【優化】流程處理頁面展示</p>
+            <p>* 【優化】流程支援角色審批</p>
+            <p>* 【新增】整合IdentityServer4，實現基於OAuth2的登錄體系</p>
+            <p>* 【新增】建立三方對接規範，已有系統可以無縫對接流程引擎，請參考官方<a href="http://doc.openauth.me/thirdparty" target="_top">對接說明</a></p>
+        </div>
+        
+        <div class="layui-elem-quote layui-quote-nm">
+            <h3># 1.4 - 2019.3</h3>
+            <p>* 【優化】升級layui至2.4.5</p>
+            <p>* 【優化】升級vue至2.6.10</p>
+            <p>* 【優化】全面調整icon設計</p>
+            <p>* 【優化】全面優化樹形選擇控制元件</p>
+            <p>* 【優化】全面重寫界面初始化互動，優化layui與vue數據初始化賦值，讀取。</p>
+            <p>* 【優化】全面優化log4net日誌輸出</p>
+            <p>* 【新增】全面實現數據欄位許可權控制。針對自定義模組，可以為角色分配可見欄位</p>
+            <p>* 【新增】模組可隱藏功能，只授權，但不在導航欄顯示</p>
+        </div>
+
+    </div>
+    <div class="sysNotice col">
+        <blockquote class="layui-elem-quote title">系統基本參數</blockquote>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col>
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td>當前版本</td>
+                    <td class="version"></td>
+                </tr>
+                <tr>
+                    <td>開發作者</td>
+                    <td class="author"></td>
+                </tr>
+                <tr>
+                    <td>網站首頁</td>
+                    <td class="homePage"></td>
+                </tr>
+                <tr>
+                    <td>伺服器環境</td>
+                    <td class="server"></td>
+                </tr>
+                <tr>
+                    <td>資料庫版本</td>
+                    <td class="dataBase"></td>
+                </tr>
+                <tr>
+                    <td>最大上傳限制</td>
+                    <td class="maxUpload"></td>
+                </tr>
+                <tr>
+                    <td>當前使用者許可權</td>
+                    <td class="userRights"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/userJs/main.js?v=2.0.0"></script>

@@ -1,0 +1,152 @@
+@section header
+{
+    <link rel="stylesheet" href="/css/treetable.css" />
+}
+<blockquote class="layui-elem-quote news_search toolList" id="menus">
+</blockquote>
+
+<div class="layui-card">
+
+    <table class="layui-table" id="mainList"
+           lay-data="{height: 'full-80', page:true, id:'mainList'}"
+           lay-filter="list" lay-size="sm">
+    </table>
+
+    <script type="text/html" id="Disable">
+        {{# if(d.Disable){ }}
+        <span class="layui-badge">已禁用</span>
+        {{# } else{}}
+        <span class="layui-badge layui-bg-green">正常</span>
+        {{# } }}
+    </script>
+
+</div>  
+
+<!--新增/編輯視窗-->
+<div id="divEdit" style="display: none">
+    <form class="layui-form" action=""  id="formEdit">
+    <input type="hidden" name="Id" v-model="tmp.Id" />
+    <div class="layui-form-item">
+        <label class="layui-form-label">相關單據號</label>
+        <div class="layui-input-block">
+            <input type="text" name="ExternalNo" v-model="tmp.ExternalNo"  
+                placeholder="相關單據號" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">相關單據型別</label>
+        <div class="layui-input-block">
+            <input type="text" name="ExternalType" v-model="tmp.ExternalType"  
+                placeholder="相關單據型別" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">入庫通知單狀態 </label>
+        <div class="layui-input-block">
+            <input type="radio" name="Status" value="1" title="value1" checked>
+            <input type="radio" name="Status" value="0" title="value2">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">入庫型別 </label>
+        <div class="layui-input-block">
+            <input type="text" name="OrderType" v-model="tmp.OrderType"  
+                placeholder="入庫型別 " autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品類別</label>
+        <div class="layui-input-block">
+            <input type="text" name="GoodsType" v-model="tmp.GoodsType"  
+                placeholder="商品類別" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">採購單號</label>
+        <div class="layui-input-block">
+            <input type="text" name="PurchaseNo" v-model="tmp.PurchaseNo"  
+                placeholder="採購單號" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">倉庫編號</label>
+        <div class="layui-input-block">
+            <input type="text" name="StockId" v-model="tmp.StockId"  
+                placeholder="倉庫編號" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">貨主編號(固定值CQM)</label>
+        <div class="layui-input-block">
+            <input type="text" name="OwnerId" v-model="tmp.OwnerId"  
+                placeholder="貨主編號(固定值CQM)" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">承運人編號</label>
+        <div class="layui-input-block">
+            <input type="text" name="ShipperId" v-model="tmp.ShipperId"  
+                placeholder="承運人編號" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">供應商編號</label>
+        <div class="layui-input-block">
+            <input type="text" name="SupplierId" v-model="tmp.SupplierId"  
+                placeholder="供應商編號" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">預定入庫時間</label>
+        <div class="layui-input-block">
+            <input type="text" name="ScheduledInboundTime" v-model="tmp.ScheduledInboundTime"  
+                placeholder="預定入庫時間" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">備註</label>
+        <div class="layui-input-block">
+            <input type="text" name="Remark" v-model="tmp.Remark"  
+                placeholder="備註" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">有效標誌</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="Enable" v-model="tmp.Enable" lay-skin="switch" value="1">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">承運方式</label>
+        <div class="layui-input-block">
+            <input type="text" name="TransferType" v-model="tmp.TransferType"  
+                placeholder="承運方式" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否入保稅庫(0:否,1:是)</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="InBondedArea" v-model="tmp.InBondedArea" lay-skin="switch" value="1">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">銷退箱數</label>
+        <div class="layui-input-block">
+            <input type="text" name="ReturnBoxNum" v-model="tmp.ReturnBoxNum"  
+                placeholder="銷退箱數" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formSubmit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/userJs/wmsinboundordertbls.js?v2.0.0"></script>
+
+

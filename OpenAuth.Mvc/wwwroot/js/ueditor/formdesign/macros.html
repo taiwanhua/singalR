@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>宏控制元件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript">
+function createElement(type, name)
+{     
+    var element = null;     
+    try {        
+        element = document.createElement('<'+type+' name="'+name+'">');     
+    } catch (e) {}   
+    if(element==null) {     
+        element = document.createElement(type);     
+        element.name = name;     
+    } 
+    return element;     
+}
+    </script>
+</head>
+<body>
+<div class="content">
+    <table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th><span>控制元件名稱</span><span class="label label-important">*</span></th>
+            <th><span>型別</span></th>
+        </tr>
+        <tr>
+            <td>
+                <input id="orgname" type="text" placeholder="必填項"/>
+            </td>
+            <td>
+                <select  id="orgtype" class="span7">
+                    <optgroup label="----常用日期宏控制元件----">
+                        <option value="sys_datetime">當前日期+時間 [ 1997-01-01 12:30 ]</option>
+                        <option value="sys_date">當前日期 [ 1997-01-01 ]</option>
+                        <option value="sys_date_cn">當前日期 [ 1997年1月1日 ]</option>
+                        <option value="sys_date_cn_short1">當前日期 [ 1997年1月 ]</option>
+                        <option value="sys_date_cn_short4">當前年份 [ 1997 ]</option>
+                        <option value="sys_date_cn_short3">當前年份 [ 1997年 ]</option>
+                        <option value="sys_date_cn_short2">當前日期 [ 1月1日 ]</option>
+                        <option value="sys_time">當前時間 [ 12:30 ]</option>
+                        <option value="sys_week">當前星期 [ 星期一 ]</option>
+                    </optgroup>
+                    <optgroup label="----擴充套件定義----">
+                        <option value="sys_userid">當前使用者ID，如 9527</option>
+                        <option value="sys_realname">當前使用者姓名，如 唐伯虎</option>
+                        <option value="sys_dept">當前使用者部門，如 華府</option>
+                    </optgroup>
+                </select>
+            </td>
+        </tr>
+    </thead>
+    <tbody id='itemAttr'>
+        <tr>
+            <th><span>控制元件樣式</span></th>
+            <th><span>可見性</span></th>
+        </tr>
+        <tr>
+            <td>
+                寬 <input id="orgwidth" type="text" value="150" class="input-small span1" placeholder="auto"/> px
+                &nbsp;&nbsp;
+                字型大小 <input id="orgfontsize" type="text" value="" class="input-small span1" placeholder="auto"/> px
+                
+            </td>
+            <td>
+                <label class="checkbox"> <input id="orghide" type="checkbox"> 隱藏 </label>
+            </td>
+        </tr>
+    </tbody>
+    
+    </table>
+</div>
+<script type="text/javascript">
+var oNode = null,thePlugins = 'macros';
+window.onload = function() {
+    if( UE.plugins[thePlugins].editdom ) {
+        oNode = UE.plugins[thePlugins].editdom;
+        var gTitle=oNode.getAttribute('title').replace(/&quot;/g,"\""),gHidden=oNode.getAttribute('orghide'),gFontSize=oNode.getAttribute('orgfontsize'),gWidth=oNode.getAttribute('orgwidth'),gType=oNode.getAttribute('orgtype');
+        gTitle = gTitle==null ? '' : gTitle;
+        $G('orgname').value = gTitle;
+        //if( oNode.tagName == 'INPUT' ) {}
+        if(oNode.getAttribute('orghide')=='1'){
+            $G('orghide').checked = true;
+        }
+        $G('orgname').value    = gTitle;
+        $G('orgtype').value    = gType; 
+        $G('orgwidth').value = gWidth;
+        $G('orgfontsize').value = gFontSize;
+    }
+}
+
+dialog.oncancel = function () {
+    if( UE.plugins[thePlugins].editdom ) {
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+dialog.onok = function (){
+    if ( $G('orgname').value == '' ) {
+        alert('控制元件名稱不能為空');
+        return false;
+    }
+    var gTitle=$G('orgname').value.replace(/\"/g,"&quot;"),gFontSize=$G('orgfontsize').value,gWidth=$G('orgwidth').value,gType=$G('orgtype').value;
+    if( !oNode ) {
+        try {
+                /*
+                if ( $G('orgtype').value.indexOf('sys_list')>0 ) {
+                    oNode = document.createElement("select");
+                    var objOption = new Option('{macros}', '');
+                    oNode.options[oNode.options.length] = objOption;
+                } else {
+                    //input
+                }*/
+                oNode = createElement('input','leipiNewField');
+                oNode.setAttribute('type','text');
+                oNode.setAttribute('value','{macros}');
+                
+                oNode.setAttribute('title',gTitle);
+                oNode.setAttribute('name','leipiNewField');
+                oNode.setAttribute('leipiPlugins',thePlugins);
+                oNode.setAttribute('orgtype',gType); 
+                if( $G('orghide').checked ) {
+                    oNode.setAttribute('orghide', '1' ) ;
+                } else {
+                    oNode.setAttribute('orghide', '0' ) ;
+                }
+                if( gFontSize != '' ) {
+                    oNode.style.fontSize = gFontSize + 'px';
+                    oNode.setAttribute('orgfontsize',gFontSize );
+                }
+                if( gWidth != '' ) {
+                    oNode.style.width = gWidth + 'px';
+                    oNode.setAttribute('orgwidth',gWidth );
+                }
+                editor.execCommand('insertHtml',oNode.outerHTML);
+                return true;
+            } catch ( e ) {
+                try {
+                    editor.execCommand('error');
+                } catch ( e ) {
+                    alert('控制元件異常，請到 [雷劈網] 反饋或尋求幫助！');
+                }
+                return false;
+            }
+    } else {
+        var norgname = oNode.getAttribute('name').replace(/\"/g,"&quot;");
+        var oNewNode = null;
+        domUtils.remove(oNode,false);  //刪除當前控制元件，再建立一個新的
+        /*
+        if ( $G('orgtype').value.indexOf('sys_list') > 0 ) {
+            oNewNode = document.createElement("select");
+            var objOption = new Option('{macros}', '');
+            oNewNode.options[oNewNode.options.length] = objOption;
+        }*/
+        oNewNode = createElement('input','leipiNewField');
+        oNewNode.setAttribute('type','text');
+        oNewNode.setAttribute('value','{macros}');
+        oNewNode.setAttribute('title',gTitle);
+        oNewNode.setAttribute('name',norgname);
+        oNewNode.setAttribute('leipiPlugins',thePlugins ); 
+        oNewNode.setAttribute('orgtype',gType); 
+        if( $G('orghide').checked ) {
+            oNewNode.setAttribute('orghide', '1' ) ;
+        } else {
+            oNewNode.setAttribute('orghide', '0' ) ;
+        }
+        if( gFontSize != '' ) {
+            oNewNode.style.fontSize = gFontSize + 'px';
+            oNewNode.setAttribute('orgfontsize',gFontSize );
+        }else{
+            oNewNode.setAttribute('orgfontsize', '');
+        }
+        if( gWidth != '' ) {
+            oNewNode.style.width = gWidth + 'px';
+            oNewNode.setAttribute('orgwidth',gWidth );
+        }else{
+            oNewNode.setAttribute('orgwidth', '');
+        }
+        editor.execCommand('insertHtml',oNewNode.outerHTML);
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+</script>
+</body>
+</html>
